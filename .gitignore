@@ -1,0 +1,16 @@
+.classpath
+.project
+.eclipse
+.settings
+target
+.idea
+*.iml
+*.ipr
+*.iws
+.gradle
+build
+generated-sources
+classes
+logs
+out
+gradle
