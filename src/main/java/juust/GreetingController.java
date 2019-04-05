@@ -33,7 +33,14 @@ public class GreetingController {
         return "koosta-vaagen";
     }
 
-    @PostMapping("/vaagen-tellitud")
+    @PostMapping("/tellimus")
+    public String tellimus(Model model) {
+        model.addAttribute("availablePlatters", availablePlatters);
+        System.out.println("ORDERED");
+        return "vaagen-tellitud";
+    }
+
+    @GetMapping("/tellimus")
     public String vaagenTellitud(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
         return "vaagen-tellitud";
