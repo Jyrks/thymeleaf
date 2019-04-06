@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -26,51 +27,63 @@ public class PdfService {
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("iTextTable.pdf"));
         document.open();
 
-        document.add(new Paragraph("Juustuunelm OÜ"));
+        document.add(new Paragraph("Juustuunelm OÜ", new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD)));
         document.add(createEmptyRows(3));
 
-        document.add(new Paragraph("Arve nr: " + 1));
-        document.add(new Paragraph("Kuupäev: " + createDate(0)));
-        document.add(new Paragraph("Tähtaeg: " + createDate(7)));
-        document.add(createEmptyRows(2));
+        PdfPTable billInfo = new PdfPTable(8);
+        billInfo.setWidthPercentage(100);
+        billInfo.addCell(createBoldCell("Arve nr:"));
+        billInfo.addCell(createCell("1"));
+        addEmptyCells(6, billInfo);
+        billInfo.addCell(createBoldCell("Kuupäev:"));
+        billInfo.addCell(createCell(createDate(0)));
+        addEmptyCells(6, billInfo);
+        billInfo.addCell(createBoldCell("Tähtaeg:"));
+        billInfo.addCell(createCell(createDate(7)));
+        addEmptyCells(6, billInfo);
+        addEmptyCells(8, billInfo);
+        addEmptyCells(8, billInfo);
 
-        document.add(new Paragraph("Maksja: " + "kliendiNimi"));
-        document.add(createEmptyRows(2));
+        billInfo.addCell(createBoldCell("Maksja:"));
+        billInfo.addCell(createCell("kliendiNimi"));
+        addEmptyCells(6, billInfo);
+        document.add(billInfo);
+        document.add(createEmptyRows(3));
 
         float[] columnWidths = {4, 2, 2};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(100);
-        table.addCell(createCellWithoutBorders("Toode"));
-        table.addCell(createCellWithoutBorders("Kogus"));
-        table.addCell(createCellWithoutBorders("Hind"));
-        createEmptyRows(3, 1, table);
-        drawLine(36, 559, 580, writer);
+        table.addCell(createBoldCell("Toode"));
+        table.addCell(createBoldCell("Kogus"));
+        table.addCell(createBoldCell("Hind"));
+        addEmptyCells(3, table);
+        drawLine(36, 559, 565, writer);
 
-        table.addCell(createCellWithoutBorders("Mahe vaagen"));
-        table.addCell(createCellWithoutBorders("1"));
-        table.addCell(createCellWithoutBorders("80.00"));
+        table.addCell(createCell("Mahe vaagen"));
+        table.addCell(createCell("1"));
+        table.addCell(createCell("80.00"));
         document.add(table);
         document.add(createEmptyRows(2));
 
-        document.add(alignRight("KOKKU: " + "80.00"));
+        document.add(alignRightBold("KOKKU: " + "80.00"));
         document.add(createEmptyRows(10));
 
         document.add(new Paragraph("Heveli Enok"));
         document.add(new Paragraph("Kandikumeister"));
-        document.add(createEmptyRows(14));
-        drawLine(36, 559, 85, writer);
+        document.add(createEmptyRows(13));
+        drawLine(36, 559, 90, writer);
 
         PdfPTable footer = new PdfPTable(3);
         footer.setWidthPercentage(100);
-        footer.addCell(createCellWithoutBorders("Juustuunelm OÜ"));
-        footer.addCell(createCellWithoutBorders("Telefon: 53535353"));
-        footer.addCell(createCellWithoutBorders("LHV"));
-        footer.addCell(createCellWithoutBorders("Lasnamjäe 1"));
-        footer.addCell(createCellWithoutBorders("Email: hevelienok@gmail.com"));
-        footer.addCell(createCellWithoutBorders("IBAN123323232323232"));
-        footer.addCell(createCellWithoutBorders("Tallinn 13434"));
-        footer.addCell(createCellWithoutBorders("Reg nr. 1432424"));
-        footer.addCell(createCellWithoutBorders(" "));
+        footer.addCell(createCell("Juustuunelm OÜ"));
+        footer.addCell(createCell("Telefon: 53535353"));
+        footer.addCell(createCell("LHV"));
+        footer.addCell(createCell("Lasnamjäe 1"));
+        footer.addCell(createCell("Email: hevelienok@gmail.com"));
+        footer.addCell(createCell("IBAN123323232323232"));
+        footer.addCell(createCell("Tallinn 13434"));
+        footer.addCell(createCell("Reg nr. 1432424"));
+        footer.addCell(createCell(" "));
 
         document.add(footer);
 
@@ -100,21 +113,27 @@ public class PdfService {
         canvas.closePathStroke();
     }
 
-    private PdfPCell createCellWithoutBorders(String text) {
+    private PdfPCell createCell(String text) {
         PdfPCell cell = new PdfPCell(new Phrase(text));
         cell.setBorder(Rectangle.NO_BORDER);
         return cell;
     }
 
-    private void createEmptyRows(int columns, int emptyLines, PdfPTable table) {
-        for (int i = 0; i < columns * emptyLines; i++) {
-            table.addCell(createCellWithoutBorders(" "));
-        }
+    private PdfPCell createBoldCell(String text) {
+        PdfPCell cell = new PdfPCell(new Phrase(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
+        cell.setBorder(Rectangle.NO_BORDER);
+        return cell;
     }
 
-    private Paragraph alignRight(String text) {
-        Paragraph p = new Paragraph(text);
+    private Paragraph alignRightBold(String text) {
+        Paragraph p = new Paragraph(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
         p.setAlignment(Element.ALIGN_RIGHT);
         return p;
+    }
+
+    private void addEmptyCells(int emptyCells, PdfPTable table) {
+        for (int i = 0; i < emptyCells; i++) {
+            table.addCell(createCell(" "));
+        }
     }
 }
