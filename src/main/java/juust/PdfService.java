@@ -75,15 +75,15 @@ public class PdfService {
 
         PdfPTable footer = new PdfPTable(3);
         footer.setWidthPercentage(100);
-        footer.addCell(createCell("Juustuunelm OÜ"));
-        footer.addCell(createCell("Telefon: 53535353"));
+        footer.addCell(createCell("HENOK OÜ"));
+        footer.addCell(createCell("Telefon: 53826845"));
         footer.addCell(createCell("LHV"));
-        footer.addCell(createCell("Lasnamjäe 1"));
-        footer.addCell(createCell("Email: hevelienok@gmail.com"));
+        footer.addCell(createCell("Puhke 3-1"));
+        footer.addCell(createCell("Email: juustuunelm@gmail.com"));
         footer.addCell(createCell("IBAN123323232323232"));
-        footer.addCell(createCell("Tallinn 13434"));
-        footer.addCell(createCell("Reg nr. 1432424"));
-        footer.addCell(createCell(" "));
+        footer.addCell(createCell("Tallinn 10135"));
+        footer.addCell(createCell("Reg nr. 14604836"));
+        addEmptyCells(1, footer);
 
         document.add(footer);
 
