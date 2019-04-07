@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Service;
 
 import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
@@ -27,8 +27,12 @@ public class PdfService {
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("iTextTable.pdf"));
         document.open();
 
-        document.add(new Paragraph("Juustuunelm OÜ", new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD)));
+        document.add(new Paragraph("HENOK OÜ", new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD)));
         document.add(createEmptyRows(3));
+
+        Image img = Image.getInstance(ClassLoader.getSystemResource("static/img/core-img/logo.png"));
+        img.setAbsolutePosition(430f, 740f);
+        document.add(img);
 
         PdfPTable billInfo = new PdfPTable(8);
         billInfo.setWidthPercentage(100);
@@ -60,18 +64,22 @@ public class PdfService {
         drawLine(36, 559, 565, writer);
 
         table.addCell(createCell("Mahe vaagen"));
-        table.addCell(createCell("1"));
+        table.addCell(createCell("     1"));
         table.addCell(createCell("80.00"));
+
+        addEmptyCells(3, table);
+        addEmptyCells(3, table);
+
+        addEmptyCells(1, table);
+        table.addCell(createCell("Käibemaks:"));
+        table.addCell(createCell("0"));
+        addEmptyCells(1, table);
+        table.addCell(createBoldCell("KOKKU (EUR):"));
+        table.addCell(createBoldCell("80.00"));
         document.add(table);
-        document.add(createEmptyRows(2));
+        document.add(createEmptyRows(24));
 
-        document.add(alignRightBold("KOKKU: " + "80.00"));
-        document.add(createEmptyRows(10));
-
-        document.add(new Paragraph("Heveli Enok"));
-        document.add(new Paragraph("Kandikumeister"));
-        document.add(createEmptyRows(13));
-        drawLine(36, 559, 90, writer);
+        drawLine(36, 559, 92, writer);
 
         PdfPTable footer = new PdfPTable(3);
         footer.setWidthPercentage(100);
@@ -80,7 +88,7 @@ public class PdfService {
         footer.addCell(createCell("LHV"));
         footer.addCell(createCell("Puhke 3-1"));
         footer.addCell(createCell("Email: juustuunelm@gmail.com"));
-        footer.addCell(createCell("IBAN123323232323232"));
+        footer.addCell(createCell("EE477700771003390826"));
         footer.addCell(createCell("Tallinn 10135"));
         footer.addCell(createCell("Reg nr. 14604836"));
         addEmptyCells(1, footer);
@@ -123,12 +131,6 @@ public class PdfService {
         PdfPCell cell = new PdfPCell(new Phrase(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
         cell.setBorder(Rectangle.NO_BORDER);
         return cell;
-    }
-
-    private Paragraph alignRightBold(String text) {
-        Paragraph p = new Paragraph(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD));
-        p.setAlignment(Element.ALIGN_RIGHT);
-        return p;
     }
 
     private void addEmptyCells(int emptyCells, PdfPTable table) {
