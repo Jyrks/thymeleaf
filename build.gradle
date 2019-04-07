@@ -39,4 +39,4 @@ dependencies {
     testCompile("junit:junit")
 }
 
-mainClassName = 'hello.Application'
+mainClassName = 'juust.Application'

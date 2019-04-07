@@ -1,4 +1,4 @@
-package juust;
+package juust.service;
 
 import static com.itextpdf.text.Chunk.NEWLINE;
 

@@ -1,4 +1,4 @@
-package model;
+package juust.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

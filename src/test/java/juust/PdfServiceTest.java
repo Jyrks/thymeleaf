@@ -2,6 +2,8 @@ package juust;
 
 import org.junit.Test;
 
+import juust.service.PdfService;
+
 
 public class PdfServiceTest {
 
