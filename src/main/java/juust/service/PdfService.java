@@ -2,12 +2,14 @@ package juust.service;
 
 import static com.itextpdf.text.Chunk.NEWLINE;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Service;
 
+import com.google.common.io.Files;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
@@ -22,9 +24,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PdfService {
 
-    public void createPdf() throws Exception{
+    public File createPdf() throws Exception{
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("iTextTable.pdf"));
+        File file = new File(Files.createTempDir(), "Arve1.pdf");
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
         document.open();
 
         document.add(new Paragraph("HENOK OÜ", new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD)));
@@ -96,6 +99,8 @@ public class PdfService {
         document.add(footer);
 
         document.close();
+
+        return file;
     }
 
     private Paragraph createEmptyRows(int times) {
