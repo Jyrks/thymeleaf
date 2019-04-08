@@ -14,14 +14,15 @@ lisaVaagen.addEventListener("click", function (ev) {
 });
 
 $('#telliVaagen').on('click', function() {
-    console.dir($('#dateInput').val());
-
-    fetch('/tellimus', {
+    fetch('/order', {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'POST',
         body: JSON.stringify({
-            username: 'Elon Musk',
-            email: 'elonmusk@gmail.com'
+            name: $('#nameInput').val(),
+            email: $('#emailInput').val(),
+            phoneNumber: $('#phoneNumberInput').val(),
+            time: $('#selectTime option:selected').text(),
+            date: $('#dateInput').val()
         })
     })
 });

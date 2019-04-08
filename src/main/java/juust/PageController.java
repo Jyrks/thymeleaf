@@ -4,20 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import juust.model.Platter;
-import juust.service.PdfService;
+import juust.request.OrderRequest;
+import juust.service.OrderService;
 
 @Controller
-public class GreetingController {
+public class PageController {
 
     @Autowired
-    private PdfService pdfService;
+    private OrderService orderService;
 
     private static List<Platter> availablePlatters = new ArrayList<>();
 
@@ -38,16 +42,15 @@ public class GreetingController {
         return "koosta-vaagen";
     }
 
-    @PostMapping("/tellimus")
-    public String tellimus(Model model) {
-        model.addAttribute("availablePlatters", availablePlatters);
-        System.out.println("ORDERED");
-        return "vaagen-tellitud";
-    }
-
     @GetMapping("/tellimus")
     public String vaagenTellitud(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
         return "vaagen-tellitud";
+    }
+
+    @PostMapping("/order")
+    public ResponseEntity tellimus(@RequestBody OrderRequest request) {
+        orderService.createOrder(request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

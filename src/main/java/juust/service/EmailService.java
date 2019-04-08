@@ -50,6 +50,9 @@ public class EmailService {
 
         String msg = "Saadame Teile juustuvaagna tellimuse. Arve leiate manusest :)";
 
+//        File resource = new ClassPathResource("email/basic_email.html").getFile();
+//        String msg = new String(Files.readAllBytes(resource.toPath()));
+
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setContent(msg, "text/html");
 
