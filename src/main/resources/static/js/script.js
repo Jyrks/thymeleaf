@@ -14,15 +14,14 @@ lisaVaagen.addEventListener("click", function (ev) {
 });
 
 $('input[type="text"]').bind("input propertychange", function () {
-    console.log( "Handler for .keypress() called." );
-    $(this).css('border-color', '');
+    $(this).css('border', '');
 });
 
 $('#telliVaagen').on('click', function() {
     var empty = false;
     $('input[type="text"]').each(function(){
-        if ($(this).val().trim() == '') {
-            $(this).css('border-color', 'red')
+        if ($(this).val().trim() === '') {
+            $(this).css('border', '1px solid red');
             empty = true;
             return false;
         }
@@ -71,4 +70,6 @@ $j(function () {
     });
 });
 
-
+$j('#datepicker').change(function(){
+    $('input[type="text"]').css('border', '');
+});
