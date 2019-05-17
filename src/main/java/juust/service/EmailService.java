@@ -29,7 +29,7 @@ public class EmailService {
     @Autowired
     private PdfService pdfService;
 
-    public void sendEmail() throws Exception {
+    public void sendEmail() {
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
@@ -43,28 +43,32 @@ public class EmailService {
             }
         });
 
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("juustuunelm@gmail.com", "Juustuunelm"));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hampsu17@gmail.com"));
-        message.setSubject("Juustuvaagna tellimus");
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("juustuunelm@gmail.com", "Juustuunelm"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hampsu17@gmail.com"));
+            message.setSubject("Juustuvaagna tellimus");
 
-        String msg = "Saadame Teile juustuvaagna tellimuse. Arve leiate manusest :)";
+            String msg = "Saadame Teile juustuvaagna tellimuse. Arve leiate manusest :)";
 
-//        File resource = new ClassPathResource("email/basic_email.html").getFile();
-//        String msg = new String(Files.readAllBytes(resource.toPath()));
+//            File resource = new ClassPathResource("email/basic_email.html").getFile();
+//            String msg = new String(Files.readAllBytes(resource.toPath()));
 
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        mimeBodyPart.setContent(msg, "text/html");
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.setContent(msg, "text/html");
 
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(mimeBodyPart);
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mimeBodyPart);
 
-        MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-        attachmentBodyPart.attachFile(pdfService.createPdf());
-        multipart.addBodyPart(attachmentBodyPart);
+            MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+            attachmentBodyPart.attachFile(pdfService.createPdf());
+            multipart.addBodyPart(attachmentBodyPart);
 
-        message.setContent(multipart);
+            message.setContent(multipart);
 
-        Transport.send(message);
+            Transport.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to send email", e);
+        }
     }
 }

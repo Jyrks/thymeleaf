@@ -13,18 +13,38 @@ lisaVaagen.addEventListener("click", function (ev) {
     console.dir(map);
 });
 
+$('input[type="text"]').bind("input propertychange", function () {
+    console.log( "Handler for .keypress() called." );
+    $(this).css('border-color', '');
+});
+
 $('#telliVaagen').on('click', function() {
+    var empty = false;
+    $('input[type="text"]').each(function(){
+        if ($(this).val().trim() == '') {
+            $(this).css('border-color', 'red')
+            empty = true;
+            return false;
+        }
+    });
+
+    if (empty) {
+        return;
+    }
+
     fetch('/order', {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'POST',
         body: JSON.stringify({
-            name: $('#nameInput').val(),
+            personName: $('#nameInput').val(),
+            platterName: $('#selectVaagen').val(),
             email: $('#emailInput').val(),
             phoneNumber: $('#phoneNumberInput').val(),
             time: $('#selectTime option:selected').text(),
             date: $('#dateInput').val()
         })
-    })
+    });
+    window.location.href = '/tellimus';
 });
 
 $j('#datepicker').datepicker.dates['ee'] = {
