@@ -71,5 +71,5 @@ $j(function () {
 });
 
 $j('#datepicker').change(function(){
-    $('input[type="text"]').css('border', '');
+    $('#dateInput').css('border', '');
 });
