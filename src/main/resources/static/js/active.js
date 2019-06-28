@@ -41,9 +41,7 @@
             items: 1,
             margin: 0,
             loop: true,
-            nav: true,
-            navText: ['Prev', 'Next'],
-            dots: true,
+            dots: false,
             autoplay: true,
             autoplayTimeout: 5000,
             smartSpeed: 1000

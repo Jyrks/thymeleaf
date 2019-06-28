@@ -26,8 +26,8 @@ public class PageController {
     private static List<Platter> availablePlatters = new ArrayList<>();
 
     static {
-        availablePlatters.add(new Platter("Mahe"));
-        availablePlatters.add(new Platter("Tore"));
+        availablePlatters.add(new Platter("Väike"));
+        availablePlatters.add(new Platter("Suur"));
     }
 
     @GetMapping("/")
