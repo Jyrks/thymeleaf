@@ -27,7 +27,7 @@
     <script>var $j = jQuery.noConflict(true);</script>
 </head>
 
-<body>
+<body onload="loadFunction()">
 <!-- Preloader -->
 <div id="preloader">
     <i class="circle-preloader"></i>
@@ -101,11 +101,20 @@
         </div>
     </div>
 
-    <div class="receipe-post-search mb-80">
+    <div id="väikeDiv" class="receipe-post-search mb-80">
         <div class="container">
             <div class="row">
-                <div>1</div>
-                <div>x Väike</div>
+                <div id="väikeNr" style="width: calc(100%  /6); height: calc(100%  /6)"></div>
+                <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/väike.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div id="suurDiv" class="receipe-post-search mb-80">
+        <div class="container">
+            <div class="row">
+                <div id="suurNr" style="width: calc(100%  /6); height: calc(100%  /6); line-height: calc(100%  /6);"></div>
+                <img style="width: calc(100%  /3); height: calc(100%  /3);" src="img/bg-img/suur.jpg" alt="">
             </div>
         </div>
     </div>
@@ -132,8 +141,7 @@
     <div class="receipe-post-search mb-80">
         <div class="container">
             <div class="row">
-                <div>Vali kellaaeg</div>
-                <div>Kalender</div>
+                <div>Vali kellaaeg ja kuupäev</div>
             </div>
         </div>
     </div>

@@ -11,7 +11,31 @@ lisaVaagen.addEventListener("click", function (ev) {
         map.set(value, map.get(value) + 1);
     }
     console.dir(map);
+
+    if (value === "Väike") {
+        $('#väikeNr').text(map.get("Väike") + "x Väike");
+        $('#väikeDiv').show();
+    }
+    if (value === "Suur") {
+        $('#suurNr').text(map.get("Suur") + "x Suur");
+        $('#suurDiv').show();
+    }
 });
+
+var loadFunction = function() {
+    $('#väikeDiv').hide();
+    $('#suurDiv').hide();
+    if (decodeURIComponent(window.location.href).includes('väike')) {
+        map.set("Väike", 1);
+        $('#väikeNr').text(map.get("Väike") + "x Väike");
+        $('#väikeDiv').show();
+    }
+    if (decodeURIComponent(window.location.href).includes('suur')) {
+        map.set("Suur", 1);
+        $('#suurNr').text(map.get("Suur") + "x Suur");
+        $('#suurDiv').show();
+    }
+};
 
 $('input[type="text"]').bind("input propertychange", function () {
     $(this).css('border', '');
