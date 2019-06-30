@@ -10,7 +10,6 @@ lisaVaagen.addEventListener("click", function (ev) {
     } else {
         map.set(value, map.get(value) + 1);
     }
-    console.dir(map);
 
     if (value === "Väike") {
         $('#väikeNr').text(map.get("Väike") + "x Väike");
@@ -55,12 +54,18 @@ $('#telliVaagen').on('click', function() {
         return;
     }
 
+    var array = [];
+
+    map.forEach(function (value, key, map) {
+        array.push(key + " " + value);
+    });
+
     fetch('/order', {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: 'POST',
         body: JSON.stringify({
             personName: $('#nameInput').val(),
-            platterName: $('#selectVaagen').val(),
+            platters: array,
             email: $('#emailInput').val(),
             phoneNumber: $('#phoneNumberInput').val(),
             time: $('#selectTime option:selected').text(),

@@ -1,7 +1,9 @@
 package juust.service;
 
 import juust.dao.OrdersDao;
+import juust.dao.PlatterDao;
 import juust.model.Order;
+import juust.model.Platter;
 import juust.request.OrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +19,23 @@ public class OrderService {
     private OrdersDao ordersDao;
 
     @Autowired
+    private PlatterDao platterDao;
+
+    @Autowired
     private EmailService emailService;
 
     public void createOrder(OrderRequest request) {
 
+        Double price = 0.0;
+        for (String s : request.getPlatters()) {
+            Platter p = platterDao.getPlatterByName(s.split(" ")[0]);
+            int count = Integer.valueOf(s.split(" ")[1]);
+            price += p.getPrice() * (double) count;
+        }
 
         Order o = new Order();
-        o.setPrice(79.99);
-        o.setOrderName(request.getPlatterName());
+        o.setPrice(price);
+        o.setOrderName(request.getPlatters().toString());
         o.setPersonName(request.getPersonName());
         o.setEmail(request.getEmail());
         o.setPhone(request.getPhoneNumber());

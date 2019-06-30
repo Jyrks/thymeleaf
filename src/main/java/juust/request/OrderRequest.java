@@ -2,9 +2,11 @@ package juust.request;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class OrderRequest {
-    private String platterName;
+    private List<String> platters;
     private String personName;
     private String email;
     private String phoneNumber;
