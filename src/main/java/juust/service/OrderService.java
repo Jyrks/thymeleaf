@@ -2,13 +2,17 @@ package juust.service;
 
 import juust.dao.OrdersDao;
 import juust.dao.PlatterDao;
+import juust.model.EmailInfo;
 import juust.model.Order;
 import juust.model.Platter;
+import juust.model.PlatterOrder;
 import juust.request.OrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static juust.util.DateUtil.createUserDate;
 
@@ -26,11 +30,16 @@ public class OrderService {
 
     public void createOrder(OrderRequest request) {
 
-        Double price = 0.0;
+        double price = 0.0;
+        List<PlatterOrder> list = new ArrayList<>();
         for (String s : request.getPlatters()) {
             Platter p = platterDao.getPlatterByName(s.split(" ")[0]);
-            int count = Integer.valueOf(s.split(" ")[1]);
-            price += p.getPrice() * (double) count;
+            PlatterOrder po = new PlatterOrder();
+            po.setName(p.getName());
+            po.setPrice(p.getPrice());
+            po.setNumber(Integer.valueOf(s.split(" ")[1]));
+            price += p.getPrice() * (double) po.getNumber();
+            list.add(po);
         }
 
         Order o = new Order();
@@ -46,7 +55,15 @@ public class OrderService {
 
         ordersDao.insertOrder(o);
 
-//        emailService.sendEmail();
+        EmailInfo e = new EmailInfo();
+        e.setDate(o.getDate());
+        e.setId((ordersDao.getOrderId()));
+        e.setPlatterOrders(list);
+        e.setEmail(o.getEmail());
+        e.setPrice(o.getPrice());
+        e.setName(o.getPersonName());
+
+        emailService.sendEmail(e);
 
         System.out.println(request);
     }

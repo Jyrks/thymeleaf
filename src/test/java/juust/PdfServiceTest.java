@@ -2,6 +2,7 @@ package juust;
 
 import java.io.File;
 
+import juust.model.EmailInfo;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -12,6 +13,6 @@ public class PdfServiceTest {
 
     @Test
     public void test() throws Exception{
-        FileUtils.copyFile(new PdfService().createPdf(), new File("iTextTable.pdf"));
+        FileUtils.copyFile(new PdfService().createPdf(new EmailInfo()), new File("iTextTable.pdf"));
     }
 }

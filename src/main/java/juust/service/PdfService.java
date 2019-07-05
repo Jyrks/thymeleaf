@@ -6,7 +6,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import juust.model.EmailInfo;
+import juust.model.PlatterOrder;
 import org.springframework.stereotype.Service;
 
 import com.google.common.io.Files;
@@ -24,7 +27,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PdfService {
 
-    public File createPdf() throws Exception{
+    public File createPdf(EmailInfo emailInfo) throws Exception{
         Document document = new Document();
         File file = new File(Files.createTempDir(), "Arve1.pdf");
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
@@ -40,7 +43,7 @@ public class PdfService {
         PdfPTable billInfo = new PdfPTable(8);
         billInfo.setWidthPercentage(100);
         billInfo.addCell(createBoldCell("Arve nr:"));
-        billInfo.addCell(createCell("1"));
+        billInfo.addCell(createCell("" + emailInfo.getId()));
         addEmptyCells(6, billInfo);
         billInfo.addCell(createBoldCell("Kuupäev:"));
         billInfo.addCell(createCell(createDate(0)));
@@ -52,7 +55,7 @@ public class PdfService {
         addEmptyCells(8, billInfo);
 
         billInfo.addCell(createBoldCell("Maksja:"));
-        billInfo.addCell(createCell("kliendiNimi"));
+        billInfo.addCell(createCell(emailInfo.getName()));
         addEmptyCells(6, billInfo);
         document.add(billInfo);
         document.add(createEmptyRows(3));
@@ -66,9 +69,7 @@ public class PdfService {
         addEmptyCells(3, table);
         drawLine(36, 559, 565, writer);
 
-        table.addCell(createCell("Mahe vaagen"));
-        table.addCell(createCell("     1"));
-        table.addCell(createCell("80.00"));
+        createOrders(emailInfo.getPlatterOrders(), table);
 
         addEmptyCells(3, table);
         addEmptyCells(3, table);
@@ -78,9 +79,9 @@ public class PdfService {
         table.addCell(createCell("0"));
         addEmptyCells(1, table);
         table.addCell(createBoldCell("KOKKU (EUR):"));
-        table.addCell(createBoldCell("80.00"));
+        table.addCell(createBoldCell("" + emailInfo.getPrice()));
         document.add(table);
-        document.add(createEmptyRows(24));
+        document.add(createEmptyRows(27 - (2 * emailInfo.getPlatterOrders().size())));
 
         drawLine(36, 559, 92, writer);
 
@@ -101,6 +102,14 @@ public class PdfService {
         document.close();
 
         return file;
+    }
+
+    private void createOrders(List<PlatterOrder> platterOrders, PdfPTable table) {
+        for (PlatterOrder po : platterOrders) {
+            table.addCell(createCell(po.getName()));
+            table.addCell(createCell("     " + po.getNumber()));
+            table.addCell(createCell("" + po.getPrice()));
+        }
     }
 
     private Paragraph createEmptyRows(int times) {

@@ -13,6 +13,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import juust.model.EmailInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class EmailService {
     @Autowired
     private PdfService pdfService;
 
-    public void sendEmail() {
+    public void sendEmail(EmailInfo emailInfo) {
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
@@ -46,7 +47,7 @@ public class EmailService {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("juustuunelm@gmail.com", "Juustuunelm"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("hampsu17@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailInfo.getEmail()));
             message.setSubject("Juustuvaagna tellimus");
 
             String msg = "Saadame Teile juustuvaagna tellimuse. Arve leiate manusest :)";
@@ -61,7 +62,7 @@ public class EmailService {
             multipart.addBodyPart(mimeBodyPart);
 
             MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-            attachmentBodyPart.attachFile(pdfService.createPdf());
+            attachmentBodyPart.attachFile(pdfService.createPdf(emailInfo));
             multipart.addBodyPart(attachmentBodyPart);
 
             message.setContent(multipart);
