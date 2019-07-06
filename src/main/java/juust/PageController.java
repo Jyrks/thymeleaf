@@ -3,6 +3,8 @@ package juust;
 import java.util.ArrayList;
 import java.util.List;
 
+import juust.request.EmailRequest;
+import juust.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class PageController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private EmailService emailService;
 
     private static List<Platter> availablePlatters = new ArrayList<>();
 
@@ -48,9 +53,21 @@ public class PageController {
         return "vaagen-tellitud";
     }
 
+    @GetMapping("/kontakt")
+    public String contactPage(Model model) {
+        model.addAttribute("availablePlatters", availablePlatters);
+        return "kontakt";
+    }
+
     @PostMapping("/order")
     public ResponseEntity tellimus(@RequestBody OrderRequest request) {
         orderService.createOrder(request);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/sendEmail")
+    public ResponseEntity email(@RequestBody EmailRequest request) {
+        emailService.sendUserEmail(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
