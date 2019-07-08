@@ -45,7 +45,6 @@ $('input[type="text"]').bind("input propertychange", function () {
 
 $('#telliVaagen').on('click', function() {
     if (map.size === 0) {
-        console.log('Empty');
         $('#lisaKandikText').show();
         return;
     }
