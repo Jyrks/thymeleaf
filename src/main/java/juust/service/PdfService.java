@@ -29,7 +29,7 @@ public class PdfService {
 
     public File createPdf(EmailInfo emailInfo) throws Exception{
         Document document = new Document();
-        File file = new File(Files.createTempDir(), "Arve1.pdf");
+        File file = new File(Files.createTempDir(), "Arve" + emailInfo.getId() + ".pdf");
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
         document.open();
 
@@ -81,7 +81,7 @@ public class PdfService {
         table.addCell(createBoldCell("KOKKU (EUR):"));
         table.addCell(createBoldCell("" + emailInfo.getPrice()));
         document.add(table);
-        document.add(createEmptyRows(27 - (2 * emailInfo.getPlatterOrders().size())));
+        document.add(createEmptyRows(25 -  emailInfo.getPlatterOrders().size()));
 
         drawLine(36, 559, 92, writer);
 
