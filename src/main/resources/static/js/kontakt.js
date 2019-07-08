@@ -9,4 +9,6 @@ $('#sendEmail').on('click', function() {
             name: $('#nameInput').val()
         })
     });
+
+    window.location.href = '/email-saadetud';
 });

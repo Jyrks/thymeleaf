@@ -53,6 +53,12 @@ public class PageController {
         return "vaagen-tellitud";
     }
 
+    @GetMapping("/email-saadetud")
+    public String emailSaadetud(Model model) {
+        model.addAttribute("availablePlatters", availablePlatters);
+        return "email-saadetud";
+    }
+
     @GetMapping("/kontakt")
     public String contactPage(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
