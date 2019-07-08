@@ -14,16 +14,19 @@ lisaVaagen.addEventListener("click", function (ev) {
     if (value === "Väike") {
         $('#väikeNr').text(map.get("Väike") + "x Väike");
         $('#väikeDiv').show();
+        $('#lisaKandikText').hide();
     }
     if (value === "Suur") {
         $('#suurNr').text(map.get("Suur") + "x Suur");
         $('#suurDiv').show();
+        $('#lisaKandikText').hide();
     }
 });
 
 var loadFunction = function() {
     $('#väikeDiv').hide();
     $('#suurDiv').hide();
+    $('#lisaKandikText').hide();
     if (decodeURIComponent(window.location.href).includes('väike')) {
         map.set("Väike", 1);
         $('#väikeNr').text(map.get("Väike") + "x Väike");
@@ -41,6 +44,12 @@ $('input[type="text"]').bind("input propertychange", function () {
 });
 
 $('#telliVaagen').on('click', function() {
+    if (map.size === 0) {
+        console.log('Empty');
+        $('#lisaKandikText').show();
+        return;
+    }
+
     var empty = false;
     $('input[type="text"]').each(function(){
         if ($(this).val().trim() === '') {
