@@ -1,24 +1,19 @@
 package juust.service;
 
-import java.util.Properties;
-
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import juust.model.EmailInfo;
 import juust.request.EmailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.util.Properties;
 
 @Service
 public class EmailService {
@@ -52,10 +47,7 @@ public class EmailService {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailInfo.getEmail()));
             message.setSubject("Juustuvaagna tellimus");
 
-            String msg = "Saadame Teile juustuvaagna tellimuse. Arve leiate manusest :)";
-
-//            File resource = new ClassPathResource("email/basic_email.html").getFile();
-//            String msg = new String(Files.readAllBytes(resource.toPath()));
+            String msg = Resources.toString(getClass().getClassLoader().getResource("/email/basic_email.html"), Charsets.UTF_8).replace("clientName", emailInfo.getName());
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
             mimeBodyPart.setContent(msg, "text/html");

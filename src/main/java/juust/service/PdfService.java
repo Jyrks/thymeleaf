@@ -36,7 +36,7 @@ public class PdfService {
         document.add(new Paragraph("HENOK OÜ", new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD)));
         document.add(createEmptyRows(3));
 
-        Image img = Image.getInstance(ClassLoader.getSystemResource("static/img/core-img/logo.png"));
+        Image img = Image.getInstance(getClass().getClassLoader().getResource("static/img/core-img/logo.png"));
         img.setAbsolutePosition(430f, 740f);
         document.add(img);
 
