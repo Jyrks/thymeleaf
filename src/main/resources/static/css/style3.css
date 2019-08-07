@@ -24,7 +24,7 @@
     /*removing fixed changes some stuff*/
     background: url('../img/bg-img/Selection_255.png') no-repeat fixed;
     background-size: cover;
-    min-height: 630px;
+    min-height: 750px;
     position: relative;
 }
 
@@ -81,7 +81,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    height: 80px;
+    height: 60px;
     background-color: #ffffff; }
 @media only screen and (max-width: 767px) {
     .footer-area {
