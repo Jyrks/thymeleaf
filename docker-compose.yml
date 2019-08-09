@@ -12,8 +12,10 @@ services:
       - "80:80"
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    extra_hosts:
-      - "host"
+    networks:
+      hostnet:
+        external: true
+        name: host
   certbot:
     image: certbot/certbot
     restart: unless-stopped
