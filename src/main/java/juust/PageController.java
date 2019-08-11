@@ -41,10 +41,10 @@ public class PageController {
         return "index3";
     }
 
-    @GetMapping("/koosta-vaagen.html")
-    public String koostaVaagen(Model model) {
+    @GetMapping("/telli.html")
+    public String telli(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
-        return "koosta-vaagen";
+        return "telli";
     }
 
     @GetMapping("/tellimus")
