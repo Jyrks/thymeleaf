@@ -41,16 +41,16 @@ public class PageController {
         return "index3";
     }
 
-    @GetMapping("/telli.html")
+    @GetMapping("/telli")
     public String telli(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
         return "telli";
     }
 
-    @GetMapping("/tellimus")
+    @GetMapping("/tellitud")
     public String vaagenTellitud(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
-        return "vaagen-tellitud";
+        return "tellitud";
     }
 
     @GetMapping("/email-saadetud")
