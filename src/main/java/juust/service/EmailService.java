@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 @Service
@@ -83,9 +81,10 @@ public class EmailService {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(request.getEmailAddress(), request.getName()));
+            message.setFrom(new InternetAddress(request.getEmailAddress(), encode(request.getName())));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("juustuunelm@gmail.com"));
-            message.setSubject(request.getName() + " küsimus");
+            message.setSubject(encode(request.getName() + " küsimus"));
+
             message.setReplyTo(new Address[]
                 {
                     new javax.mail.internet.InternetAddress(request.getEmailAddress())
@@ -103,5 +102,9 @@ public class EmailService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to send email", e);
         }
+    }
+
+    private String encode(String s) throws UnsupportedEncodingException {
+        return MimeUtility.encodeText(s, "utf-8", "B");
     }
 }
