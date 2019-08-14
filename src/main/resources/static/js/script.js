@@ -77,8 +77,16 @@ $('#telliVaagen').on('click', function() {
             email: $('#emailInput').val(),
             phoneNumber: $('#phoneNumberInput').val(),
             time: $('#selectTime option:selected').text(),
-            date: $('#dateInput').val()
+            date: $('#datepicker').val()
         })
     });
+
     window.location.href = '/tellitud';
+});
+
+$(function () {
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4',
+        weekStartDay: 1
+    });
 });
