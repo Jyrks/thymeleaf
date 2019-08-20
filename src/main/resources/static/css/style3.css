@@ -1,5 +1,5 @@
 .banner-text {
-    border-left: 5px solid #FCE903;
+    border-left: 5px solid #fce986;
     padding: 15px 40px;
     color: #fff;
     margin-top: 170px;
@@ -48,7 +48,7 @@
 .btn {
     font-size: 26px;
     width:100px;
-    background-color: #fae655;
+    background-color: #fce986;
     border-radius: 30px;
     font-family: 'Satisfy', cursive;
 }
