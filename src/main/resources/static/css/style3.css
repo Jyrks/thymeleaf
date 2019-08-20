@@ -46,10 +46,11 @@
 }
 
 .btn {
-    font-size: 20px;
+    font-size: 26px;
     width:100px;
     background-color: #fae655;
     border-radius: 30px;
+    font-family: 'Satisfy', cursive;
 }
 
 .styled-span {
