@@ -101,6 +101,7 @@ $('#telliVaagen').on('click', function() {
 $(function () {
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
-        weekStartDay: 1
+        weekStartDay: 1,
+        minDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1)
     });
 });
