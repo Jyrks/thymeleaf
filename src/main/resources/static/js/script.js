@@ -39,14 +39,28 @@ var loadFunction = function() {
     }
 };
 
-$('input[type="text"]').bind("input propertychange", function () {
+$('input[type="text"]').on("input propertychange", function () {
     $(this).css('border', '');
 });
+
+$('#datepicker').change(function () {
+    $(this).css('border', '');
+});
+
+function isGoodDate(dt){
+    var reGoodDate = /^((0?[1-9]|1[012])[/](0?[1-9]|[12][0-9]|3[01])[/](19|20)?[0-9]{2})*$/;
+    return reGoodDate.test(dt);
+}
 
 $('#telliVaagen').on('click', function() {
     if (map.size === 0) {
         $('#lisaKandikText').show();
         return;
+    }
+
+    if ($('#datepicker').val() === '' || !isGoodDate($('#datepicker').val())) {
+        $('#datepicker').css('border', '1px solid red');
+        return false;
     }
 
     var empty = false;
