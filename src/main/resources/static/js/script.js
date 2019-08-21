@@ -31,11 +31,13 @@ var loadFunction = function() {
         map.set("Väike", 1);
         $('#väikeNr').text(map.get("Väike") + "x Väike");
         $('#väikeDiv').show();
+        history.pushState({}, null, "/telli");
     }
     if (decodeURIComponent(window.location.href).includes('suur')) {
         map.set("Suur", 1);
         $('#suurNr').text(map.get("Suur") + "x Suur");
         $('#suurDiv').show();
+        history.pushState({}, null, "/telli");
     }
 };
 
