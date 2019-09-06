@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 
     <title>Juustuunelm</title>
     <link rel="icon" href="img/core-img/logo.png">
@@ -20,101 +20,101 @@
 
 <body>
 
-<div class="header mt-4">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <img class="navbar-brand px-4" src="img/core-img/logo.png">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link p-4" th:href="@{/}">Pealeht</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-4" th:href="@{/telli.html}">Telli</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-4" th:href="@{/kontakt.html}">Kontakt</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+<div id="page-container">
+    <div id="content-wrap" class="header mt-4">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <img class="navbar-brand px-4" src="img/core-img/logo.png">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link p-4" th:href="@{/}">Pealeht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-4" th:href="@{/telli.html}">Telli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-4" th:href="@{/kontakt.html}">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
-    <div class="wrapper">
+        <div class="wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <h3 class="large-text">Kui soovite suuremat tellimust või on tekkinud küsimusi, siis võtke meiega julgelt ühendust.</h3>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="row">
-                <div class="col-md-6 mt-5">
-                    <div class="banner-text2 text-muted">
-                        <h3 class="styled-span2 text-muted">Kui soovite suuremat tellimust või on tekkinud küsimusi, siis võtke meiega julgelt ühendust.</h3>
+                <div class="col-12 col-lg-6">
+                    <div>Email</div>
+                    <div class='input-group date'>
+                        <input type='text' class="form-control" id="emailInput"/>
                     </div>
-                    <br>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 mt-3">
+                    <div>Nimi</div>
+                    <div class='input-group date'>
+                        <input type='text' class="form-control" id="nameInput"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 mt-3">
+                    <div>Kiri</div>
+                    <div class="md-form">
+                        <textarea type="text" id="emailContent" name="message" rows="4" class="form-control md-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div class="col-md-6">
+                        <button id="sendEmail" class="btn text-muted btn-rounded pull-right">
+                            <span style="font-size:26px;">Saada</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <div>Email</div>
-                <div class='input-group date'>
-                    <input type='text' class="form-control" id="emailInput"/>
+    <footer id="footer" class="footer-area">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="footer-social-info">
+                        <a href="https://www.facebook.com/JuustuUnelm/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a class="instaaa" href="https://www.instagram.com/juustu_unelm/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-6 mt-3">
-                <div>Nimi</div>
-                <div class='input-group date'>
-                    <input type='text' class="form-control" id="nameInput"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-6 mt-3">
-                <div>Kiri</div>
-                <div class="md-form">
-                    <textarea type="text" id="emailContent" name="message" rows="4" class="form-control md-textarea"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mt-4">
-                <div class="col-md-6">
-                    <button id="sendEmail" class="btn text-muted btn-rounded pull-right">
-                        <span style="font-size:26px;">Saada</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </footer>
 </div>
-
-<footer class="footer-area mt-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                <div class="footer-social-info">
-                    <a href="https://www.facebook.com/JuustuUnelm/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a class="instaaa" href="https://www.instagram.com/juustu_unelm/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                </div>
-                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

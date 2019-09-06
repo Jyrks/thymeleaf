@@ -12,159 +12,161 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style3.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 
     <title>Juustuunelm</title>
     <link rel="icon" href="img/core-img/logo.png">
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-<!--    https://gijgo.com/datepicker/example/bootstrap-4-->
+    <!--    https://gijgo.com/datepicker/example/bootstrap-4-->
     <script src="js/datepicker.js" type="text/javascript"></script>
     <link href="css/datepicker.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body onload="loadFunction()">
 
-<div class="header mt-4">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <img class="navbar-brand px-4" src="img/core-img/logo.png">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link p-4" th:href="@{/}">Pealeht</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-4" th:href="@{/telli.html}">Telli</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-4" th:href="@{/kontakt.html}">Kontakt</a>
-                    </li>
-                </ul>
+<div id="page-container">
+    <div id="content-wrap" class="header mt-4">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <img class="navbar-brand px-4" src="img/core-img/logo.png">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link p-4" th:href="@{/}">Pealeht</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-4" th:href="@{/telli.html}">Telli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link p-4" th:href="@{/kontakt.html}">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <p>Koosta tellimus</p>
             </div>
-        </nav>
-    </div>
-    <div class="container mt-5">
-        <div class="row">
-            <p>Koosta tellimus</p>
         </div>
-    </div>
-    <div id="väikeDiv" style="display:none" class="container mb-5">
-        <div class="row">
-            <div id="väikeNr" style="width: calc(100%  /6); height: calc(100%  /6)"></div>
-            <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/väike.jpg" alt="">
+        <div id="väikeDiv" style="display:none" class="container mb-5">
+            <div class="row">
+                <div id="väikeNr" style="width: calc(100%  /6); height: calc(100%  /6)"></div>
+                <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/väike.jpg" alt="">
+            </div>
         </div>
-    </div>
-    <div id="suurDiv" style="display:none" class="container mb-5">
-        <div class="row">
-            <div id="suurNr" style="width: calc(100%  /6); height: calc(100%  /6); line-height: calc(100%  /6);"></div>
-            <img style="width: calc(100%  /3); height: calc(100%  /3);" src="img/bg-img/suur.jpg" alt="">
+        <div id="suurDiv" style="display:none" class="container mb-5">
+            <div class="row">
+                <div id="suurNr" style="width: calc(100%  /6); height: calc(100%  /6); line-height: calc(100%  /6);"></div>
+                <img style="width: calc(100%  /3); height: calc(100%  /3);" src="img/bg-img/suur.jpg" alt="">
+            </div>
         </div>
-    </div>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 col-lg-3">
-                <select name="select1" id="selectVaagen" class="custom-select">
-                    <tr th:each ="platter : ${availablePlatters}">
-                        <option th:value="${platter.name}" th:utext="${platter.name}">...</option>
-                        <td th:utext="${platter.name}">...</td>
-                    </tr>
-                </select>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-8 col-sm-3 mt-2">
+                    <select name="select1" id="selectVaagen" class="custom-select">
+                        <tr th:each ="platter : ${availablePlatters}">
+                            <option th:value="${platter.name}" th:utext="${platter.name}">...</option>
+                            <td th:utext="${platter.name}">...</td>
+                        </tr>
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 text-right">
+                    <button id="lisaVaagen" type="submit" class="btn text-muted">Lisa</button>
+                </div>
+                <div style="color: red; display:none" id="lisaKandikText" class="col-12 col-lg-3">Lisa kandik</div>
             </div>
-            <div class="col-12 col-lg-3 text-right">
-                <button id="lisaVaagen" type="submit" class="btn text-muted">Lisa</button>
-            </div>
-            <div style="color: red; display:none" id="lisaKandikText" class="col-12 col-lg-3">Lisa kandik</div>
         </div>
-    </div>
 
-    <div class="container mt-5">
-        <div class="row">
-            <p>Vali kellaaeg ja kuupäev</p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-3">
-                <select id="selectTime" class="custom-select">
-                    <option value="1">19:00</option>
-                    <option value="2">20:00</option>
-                    <option value="3">21:00</option>
-                    <option value="4">22:00</option>
-                </select>
-            </div>
-            <div class='col-sm-6'>
-                <input id="datepicker" width="276" />
+        <div class="container mt-5">
+            <div class="row">
+                <p>Vali kellaaeg ja kuupäev</p>
             </div>
         </div>
-    </div>
-
-    <div class="container mt-5">
-        <div class="row">
-            <p>Sisesta info</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 mt-3">
+                    <select id="selectTime" class="custom-select">
+                        <option value="1">19:00</option>
+                        <option value="2">20:00</option>
+                        <option value="3">21:00</option>
+                        <option value="4">22:00</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <input id="datepicker" width="276" />
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-4">
-                <div>Nimi</div>
-                <div class='input-group date'>
-                    <input type='text' class="form-control" id="nameInput"/>
+        <div class="container mt-5">
+            <div class="row">
+                <p>Sisesta info</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div>Nimi</div>
+                    <div class='input-group date'>
+                        <input type='text' class="form-control" id="nameInput"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div>Telefon</div>
+                    <div class='input-group date'>
+                        <input type='text' class="form-control" id="phoneNumberInput"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div>Email</div>
+                    <div class='input-group date'>
+                        <input type='text' class="form-control" id="emailInput"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row mb-5">
+                <div class="col-lg-1 text-right">
+                    <button id="telliVaagen" type="submit" class="btn text-muted">Telli</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12 col-lg-4">
-                <div>Telefon</div>
-                <div class='input-group date'>
-                    <input type='text' class="form-control" id="phoneNumberInput"/>
+    <footer id="footer" class="footer-area">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="footer-social-info">
+                        <a href="https://www.facebook.com/JuustuUnelm/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a class="instaaa" href="https://www.instagram.com/juustu_unelm/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12 col-lg-4">
-                <div>Email</div>
-                <div class='input-group date'>
-                    <input type='text' class="form-control" id="emailInput"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-1 text-right">
-                <button id="telliVaagen" type="submit" class="btn text-muted">Telli</button>
-            </div>
-        </div>
-    </div>
+    </footer>
 </div>
-
-<footer class="footer-area mt-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                <div class="footer-social-info">
-                    <a href="https://www.facebook.com/JuustuUnelm/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a class="instaaa" href="https://www.instagram.com/juustu_unelm/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                </div>
-                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
