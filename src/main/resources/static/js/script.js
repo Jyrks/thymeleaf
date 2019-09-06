@@ -55,22 +55,21 @@ function isGoodDate(dt){
 }
 
 $('#telliVaagen').on('click', function() {
+    var empty = false;
     if (map.size === 0) {
         $('#lisaKandikText').show();
-        return;
+        empty = true;
     }
 
     if ($('#datepicker').val() === '' || !isGoodDate($('#datepicker').val())) {
         $('#datepicker').css('border', '1px solid red');
-        return false;
+        empty = true;
     }
 
-    var empty = false;
     $('input[type="text"]').each(function(){
         if ($(this).val().trim() === '') {
             $(this).css('border', '1px solid red');
             empty = true;
-            return false;
         }
     });
 
