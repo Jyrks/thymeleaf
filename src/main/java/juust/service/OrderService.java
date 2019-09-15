@@ -7,12 +7,14 @@ import juust.model.Order;
 import juust.model.Platter;
 import juust.model.PlatterOrder;
 import juust.request.OrderRequest;
+import juust.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static juust.util.DateUtil.createUserDate;
 
@@ -66,5 +68,9 @@ public class OrderService {
         emailService.sendEmail(e);
 
         System.out.println(request);
+    }
+
+    public List<String> getOrderDates() {
+        return ordersDao.getOrderDates().stream().map(DateUtil::dateToString).collect(Collectors.toList());
     }
 }

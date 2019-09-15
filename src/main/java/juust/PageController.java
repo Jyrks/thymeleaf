@@ -23,9 +23,6 @@ import juust.service.OrderService;
 public class PageController {
 
     @Autowired
-    private OrderService orderService;
-
-    @Autowired
     private EmailService emailService;
 
     private static List<Platter> availablePlatters = new ArrayList<>();
@@ -63,12 +60,6 @@ public class PageController {
     public String contactPage(Model model) {
         model.addAttribute("availablePlatters", availablePlatters);
         return "kontakt";
-    }
-
-    @PostMapping("/order")
-    public ResponseEntity tellimus(@RequestBody OrderRequest request) {
-        orderService.createOrder(request);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/sendEmail")
