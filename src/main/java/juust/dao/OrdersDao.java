@@ -21,7 +21,7 @@ public class OrdersDao {
     }
 
     public Long getOrderId() {
-        return jdbcTemplate.queryForObject("select count(*) from orders", Long.class);
+        return jdbcTemplate.queryForObject("select id from orders order by id desc limit 1", Long.class);
     }
 
     public List<Timestamp> getOrderDates() {
