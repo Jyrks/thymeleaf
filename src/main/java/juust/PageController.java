@@ -1,8 +1,6 @@
 package juust;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import juust.model.Platter;
 import juust.request.EmailRequest;
 import juust.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import juust.model.Platter;
-import juust.request.OrderRequest;
-import juust.service.OrderService;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PageController {
@@ -28,8 +25,8 @@ public class PageController {
     private static List<Platter> availablePlatters = new ArrayList<>();
 
     static {
-        availablePlatters.add(new Platter("Väike", 65.00));
-        availablePlatters.add(new Platter("Suur", 85.00));
+        availablePlatters.add(new Platter("Väike", 60.00));
+        availablePlatters.add(new Platter("Suur", 80.00));
     }
 
     @GetMapping("/")
