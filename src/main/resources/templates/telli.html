@@ -24,8 +24,6 @@
     <link href="css/datepicker.css" rel="stylesheet" type="text/css"/>
 </head>
 
-<body onload="loadFunction()">
-
 <div id="page-container">
     <div id="content-wrap" class="header mt-4">
         <div class="container">
@@ -47,26 +45,34 @@
             </nav>
         </div>
         <div class="container mt-5">
-            <div class="row">
-                <p>Koosta tellimus</p>
+            <div class="col-12 col-lg-4">
+                <div class="row">
+                    <p>Lisa kandikutüüp ja kogus</p>
+                </div>
+                <div style="color: red; display:none" id="lisaKandikText">Lisa kandik</div>
             </div>
         </div>
         <div id="väikeDiv" style="display:none" class="container mb-5">
-            <div class="row">
-                <div id="väikeNr" style="width: calc(100%  /6); height: calc(100%  /6)"></div>
-                <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/väike.jpg" alt="">
+            <div class="col-12">
+                <div class="row">
+                    <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/väike.jpg" alt="">
+                    <div class="ml-3 mt-3" id="väikeNr"></div>
+                </div>
             </div>
         </div>
+
         <div id="suurDiv" style="display:none" class="container mb-5">
-            <div class="row">
-                <div id="suurNr" style="width: calc(100%  /6); height: calc(100%  /6); line-height: calc(100%  /6);"></div>
-                <img style="width: calc(100%  /3); height: calc(100%  /3);" src="img/bg-img/suur.jpg" alt="">
+            <div class="col-12">
+                <div class="row">
+                    <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/suur.jpg" alt="">
+                    <div class="ml-3 mt-3" id="suurNr"></div>
+                </div>
             </div>
         </div>
 
         <div class="container mt-5">
             <div class="row">
-                <div class="col-8 col-sm-3 mt-2">
+                <div class="col-12 col-lg-3 mt-2">
                     <select name="select1" id="selectVaagen" class="custom-select">
                         <tr th:each ="platter : ${availablePlatters}">
                             <option th:value="${platter.name}" th:utext="${platter.name}">...</option>
@@ -74,16 +80,29 @@
                         </tr>
                     </select>
                 </div>
-                <div class="col-3 col-sm-3 text-right">
-                    <button id="lisaVaagen" type="submit" class="btn text-muted">Lisa</button>
+                <div class="col-12 col-lg-3 mt-2">
+                    <select name="select1" id="selectKogus" class="custom-select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
                 </div>
-                <div style="color: red; display:none" id="lisaKandikText" class="col-12 col-lg-3">Lisa kandik</div>
             </div>
         </div>
 
         <div class="container mt-5">
-            <div class="row">
-                <p>Vali kuupäev ja kellaaeg</p>
+            <div class="row mb-5">
+                <div class="col-lg-1 text-right">
+                    <button id="lisaVaagen" type="submit" class="btn text-muted">Lisa</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="col-12 col-lg-4">
+                <div class="row">
+                    <p>Vali vaba kuupäev ja kellaaeg</p>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -104,7 +123,9 @@
 
         <div class="container mt-5">
             <div class="row">
-                <p>Sisesta info</p>
+                <div class="col-12 col-lg-4">
+                    <p>Sisesta enda kontakt</p>
+                </div>
             </div>
         </div>
 
@@ -158,7 +179,7 @@
                         <a href="https://www.facebook.com/JuustuUnelm/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                         <a class="instaaa" href="https://www.instagram.com/juustu_unelm/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                     </div>
-                    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    <p>+372 53826845, juustuunelm@gmail.com</p>
                 </div>
             </div>
         </div>

@@ -2,44 +2,24 @@ var map = new Map();
 
 var lisaVaagen = document.getElementById("lisaVaagen");
 var selectVaagen = document.getElementById("selectVaagen");
+var selectKogus = document.getElementById("selectKogus");
 
 lisaVaagen.addEventListener("click", function (ev) {
-    var value = selectVaagen.options[selectVaagen.selectedIndex].text;
-    if (map.get(value) == null) {
-        map.set(value, 1);
-    } else {
-        map.set(value, map.get(value) + 1);
-    }
+    var platterName = selectVaagen.options[selectVaagen.selectedIndex].text;
+    var quantity = parseInt(selectKogus.options[selectKogus.selectedIndex].text);
+    map.set(platterName, quantity);
 
-    if (value === "Väike") {
+    if (platterName === "Väike") {
         $('#väikeNr').text(map.get("Väike") + "x Väike");
         $('#väikeDiv').show();
         $('#lisaKandikText').hide();
     }
-    if (value === "Suur") {
+    if (platterName === "Suur") {
         $('#suurNr').text(map.get("Suur") + "x Suur");
         $('#suurDiv').show();
         $('#lisaKandikText').hide();
     }
 });
-
-var loadFunction = function() {
-    $('#väikeDiv').hide();
-    $('#suurDiv').hide();
-    $('#lisaKandikText').hide();
-    if (decodeURIComponent(window.location.href).includes('väike')) {
-        map.set("Väike", 1);
-        $('#väikeNr').text(map.get("Väike") + "x Väike");
-        $('#väikeDiv').show();
-        history.pushState({}, null, "/telli");
-    }
-    if (decodeURIComponent(window.location.href).includes('suur')) {
-        map.set("Suur", 1);
-        $('#suurNr').text(map.get("Suur") + "x Suur");
-        $('#suurDiv').show();
-        history.pushState({}, null, "/telli");
-    }
-};
 
 $('input[type="text"]').on("input propertychange", function () {
     $(this).css('border', '');
