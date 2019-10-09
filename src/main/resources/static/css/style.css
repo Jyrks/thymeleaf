@@ -35,8 +35,11 @@
 
 .platter-heading {
     margin-top: 10px;
-    color:#6c757d!important;
     font-family: var(--main-text-style);
+}
+
+.gray-color {
+    color:#6c757d!important;
 }
 
 .footer-area {
