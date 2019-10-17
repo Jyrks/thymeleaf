@@ -6,12 +6,16 @@ import juust.model.EmailInfo;
 import juust.request.EmailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Properties;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Service
 public class EmailService {
@@ -21,6 +25,9 @@ public class EmailService {
 
     @Value( "${email.pass}" )
     private String pass;
+
+//    @Value("classpath:/email/basic_email.html")
+//    Resource resourceFile;
 
     @Autowired
     private PdfService pdfService;
@@ -45,6 +52,8 @@ public class EmailService {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailInfo.getEmail()));
             message.setSubject("Juustuvaagna tellimus");
 
+            // For testing
+//            String msg = asString(resourceFile).replace("clientName", emailInfo.getName());
             String msg = Resources.toString(getClass().getClassLoader().getResource("/email/basic_email.html"), Charsets.UTF_8).replace("clientName", emailInfo.getName());
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
@@ -107,4 +116,12 @@ public class EmailService {
     private String encode(String s) throws UnsupportedEncodingException {
         return MimeUtility.encodeText(s, "utf-8", "B");
     }
+
+//    private String asString(Resource resource) {
+//        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
+//            return FileCopyUtils.copyToString(reader);
+//        } catch (IOException e) {
+//            throw new UncheckedIOException(e);
+//        }
+//    }
 }

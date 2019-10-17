@@ -40,23 +40,22 @@ public class PdfService {
         img.setAbsolutePosition(430f, 740f);
         document.add(img);
 
-        PdfPTable billInfo = new PdfPTable(8);
+        float[] billWidths = {1, 6, 1};
+        PdfPTable billInfo = new PdfPTable(billWidths);
         billInfo.setWidthPercentage(100);
         billInfo.addCell(createBoldCell("Arve nr:"));
         billInfo.addCell(createCell("" + emailInfo.getId()));
-        addEmptyCells(6, billInfo);
+        addEmptyCells(1, billInfo);
         billInfo.addCell(createBoldCell("Kuupäev:"));
         billInfo.addCell(createCell(createDate(0)));
-        addEmptyCells(6, billInfo);
+        addEmptyCells(1, billInfo);
         billInfo.addCell(createBoldCell("Tähtaeg:"));
         billInfo.addCell(createCell(createDate(7)));
-        addEmptyCells(6, billInfo);
-        addEmptyCells(8, billInfo);
-        addEmptyCells(8, billInfo);
+        addEmptyCells(7, billInfo);
 
         billInfo.addCell(createBoldCell("Maksja:"));
         billInfo.addCell(createCell(emailInfo.getName()));
-        addEmptyCells(6, billInfo);
+        addEmptyCells(3, billInfo);
         document.add(billInfo);
         document.add(createEmptyRows(3));
 

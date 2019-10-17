@@ -26,7 +26,7 @@ $('input[type="text"]').on("input propertychange", function () {
 });
 
 function isGoodDate(dt){
-    var reGoodDate = /^((0?[1-9]|1[012])[/](0?[1-9]|[12][0-9]|3[01])[/](19|20)?[0-9]{2})*$/;
+    var reGoodDate = /^(0?[1-9]|[12][0-9]|3[01])[/]((0?[1-9]|1[012])[/](19|20)?[0-9]{2})*$/;
     return reGoodDate.test(dt);
 }
 
@@ -100,8 +100,9 @@ $(function () {
             $('#datepicker').datepicker({
                 uiLibrary: 'bootstrap4',
                 weekStartDay: 1,
-                minDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1),
-                disableDates: unavailableDates
+                minDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 3),
+                disableDates: unavailableDates,
+                format: 'dd/mm/yyyy',
             });
         });
 });
