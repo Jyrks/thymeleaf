@@ -78,7 +78,7 @@ public class PdfService {
         table.addCell(createCell("0"));
         addEmptyCells(1, table);
         table.addCell(createBoldCell("KOKKU (EUR):"));
-        table.addCell(createBoldCell("" + emailInfo.getPrice()));
+        table.addCell(createBoldCell("" + String.format("%1$,.0f", emailInfo.getPrice()) + " €"));
         document.add(table);
         document.add(createEmptyRows(25 -  emailInfo.getPlatterOrders().size()));
 
@@ -107,7 +107,7 @@ public class PdfService {
         for (PlatterOrder po : platterOrders) {
             table.addCell(createCell(po.getName()));
             table.addCell(createCell("     " + po.getNumber()));
-            table.addCell(createCell("" + po.getPrice()));
+            table.addCell(createCell("" + String.format("%1$,.0f", po.getPrice())));
         }
     }
 

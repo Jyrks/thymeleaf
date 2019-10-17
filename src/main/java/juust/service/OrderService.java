@@ -66,6 +66,7 @@ public class OrderService {
         e.setName(o.getPersonName());
 
         emailService.sendEmail(e);
+        emailService.sendOrderEmail(e);
 
         System.out.println(request);
     }

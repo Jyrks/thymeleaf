@@ -3,6 +3,7 @@ package juust.service;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import juust.model.EmailInfo;
+import juust.model.PlatterOrder;
 import juust.request.EmailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,6 +56,49 @@ public class EmailService {
             // For testing
 //            String msg = asString(resourceFile).replace("clientName", emailInfo.getName());
             String msg = Resources.toString(getClass().getClassLoader().getResource("/email/basic_email.html"), Charsets.UTF_8).replace("clientName", emailInfo.getName());
+
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.setContent(msg, "text/html");
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mimeBodyPart);
+
+            MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+            attachmentBodyPart.attachFile(pdfService.createPdf(emailInfo));
+            multipart.addBodyPart(attachmentBodyPart);
+
+            message.setContent(multipart);
+
+            Transport.send(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to send email", e);
+        }
+    }
+
+    public void sendOrderEmail(EmailInfo emailInfo) {
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, pass);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("juustuunelm@gmail.com", "Juustuunelm"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("juustuunelm@gmail.com"));
+            message.setSubject("Tellimus " + emailInfo.getName());
+
+            String msg = "Tellija: " + emailInfo.getName() + " aeg: " + emailInfo.getDate();
+            for (PlatterOrder po : emailInfo.getPlatterOrders()) {
+                msg += " vaagen: " + po.getName() + " kogus: " + po.getNumber();
+            }
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
             mimeBodyPart.setContent(msg, "text/html");

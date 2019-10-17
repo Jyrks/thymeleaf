@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DateUtil {
 
-    private static SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+    private static SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public static Date createUserDate(String date, String time) {
         try {
