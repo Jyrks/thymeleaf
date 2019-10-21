@@ -26,6 +26,13 @@
     font-family: var(--main-text-style);
 }
 
+.medium-text {
+    font-size: 30px;
+    margin-top: 10px;
+    font-family:  var(--main-text-style);
+    color:#6c757d!important;
+}
+
 .large-text {
     font-size: 40px;
     margin-top: 10px;

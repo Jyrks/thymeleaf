@@ -59,6 +59,11 @@ public class PageController {
         return "kontakt";
     }
 
+    @GetMapping("/info")
+    public String infotPage(Model model) {
+        return "info";
+    }
+
     @PostMapping("/sendEmail")
     public ResponseEntity email(@RequestBody EmailRequest request) {
         emailService.sendUserEmail(request);
