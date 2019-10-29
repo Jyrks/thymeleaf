@@ -111,6 +111,9 @@ var availableTimes = ['19:00','20:00','21:00','22:00'];
 $('#datepicker').change(function () {
     $(this).css('border', '');
 
+    availableTimes = getAvailableTimesForTheDay($('#datepicker').val());
+    getAvailableTimesForTheDay($('#datepicker').val());
+
     $("#selectTime").empty();
     for (let i = 0; i < availableTimes.length; i++) {
         if (getAvailableDates($('#datepicker').val()).includes(availableTimes[i])) {
@@ -120,6 +123,7 @@ $('#datepicker').change(function () {
 });
 
 function getAvailableDates(date) {
+    availableTimes = getAvailableTimesForTheDay(date);
     skipNext = false;
     freeTimes = [];
     for (let i = 0; i < availableTimes.length; i++) {
@@ -142,4 +146,14 @@ function getAvailableDates(date) {
     }
 
     return freeTimes;
+}
+
+function getAvailableTimesForTheDay(date) {
+    var day = new Date(Date.UTC(date.slice(6,10), parseInt(date.slice(3,5)) - 1, date.slice(0,2), 0, 0, 0)).toLocaleDateString('en-us', { weekday: 'long' });
+
+    if (day === "Saturday" || day === "Sunday") {
+        return ['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00']
+    }
+
+    return ['19:00','20:00','21:00','22:00']
 }
