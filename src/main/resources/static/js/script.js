@@ -92,7 +92,7 @@ $(function () {
 
             var unavailableDates = [];
             orderMap.forEach(function(value, key) {
-                if (value.length == 4) {
+                if (getAvailableDates(key).length === 0) {
                     unavailableDates.push(key);
                 }
             });
@@ -107,15 +107,39 @@ $(function () {
         });
 });
 
-var availableDates = ['19:00','20:00','21:00','22:00'];
+var availableTimes = ['19:00','20:00','21:00','22:00'];
 $('#datepicker').change(function () {
     $(this).css('border', '');
 
     $("#selectTime").empty();
-    for (let i = 0; i < availableDates.length; i++) {
-        if (orderMap.get($('#datepicker').val()) != null && orderMap.get($('#datepicker').val()).includes(availableDates[i])) {
-            continue;
+    for (let i = 0; i < availableTimes.length; i++) {
+        if (getAvailableDates($('#datepicker').val()).includes(availableTimes[i])) {
+            $("#selectTime").append($("<option></option>").attr("value", availableTimes[i]).text(availableTimes[i]));
         }
-        $("#selectTime").append($("<option></option>").attr("value", availableDates[i]).text(availableDates[i]));
     }
 });
+
+function getAvailableDates(date) {
+    skipNext = false;
+    freeTimes = [];
+    for (let i = 0; i < availableTimes.length; i++) {
+
+        if (skipNext === true || orderMap.get(date) != null && orderMap.get(date).includes(availableTimes[i])) {
+            if (skipNext === true) {
+                skipNext = false
+            } else {
+                skipNext = true;
+            }
+            continue;
+        }
+
+        // Skips time before the next as well
+        if (i < availableTimes.length && orderMap.get(date) != null && orderMap.get(date).includes(availableTimes[i + 1])) {
+            continue;
+        }
+
+        freeTimes.push(availableTimes[i]);
+    }
+
+    return freeTimes;
+}
