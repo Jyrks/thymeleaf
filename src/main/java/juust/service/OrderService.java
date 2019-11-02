@@ -2,10 +2,8 @@ package juust.service;
 
 import juust.dao.OrdersDao;
 import juust.dao.PlatterDao;
-import juust.model.EmailInfo;
-import juust.model.Order;
-import juust.model.Platter;
-import juust.model.PlatterOrder;
+import juust.dao.RestrictionDao;
+import juust.model.*;
 import juust.request.OrderRequest;
 import juust.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,9 @@ public class OrderService {
 
     @Autowired
     private OrdersDao ordersDao;
+
+    @Autowired
+    private RestrictionDao restrictionDao;
 
     @Autowired
     private PlatterDao platterDao;
@@ -71,7 +72,10 @@ public class OrderService {
         System.out.println(request);
     }
 
-    public List<String> getOrderDates() {
-        return ordersDao.getOrderDates().stream().map(DateUtil::dateToString).collect(Collectors.toList());
+    public Orders getOrders() {
+        Orders orders = new Orders();
+        orders.setOrders(ordersDao.getOrderDates().stream().map(DateUtil::dateToString).collect(Collectors.toList()));
+        orders.setBlockedDates(restrictionDao.getRestrictions().stream().map(DateUtil::dateToString).collect(Collectors.toList()));
+        return orders;
     }
 }

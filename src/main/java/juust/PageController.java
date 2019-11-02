@@ -4,6 +4,7 @@ import juust.model.Platter;
 import juust.request.EmailRequest;
 import juust.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import java.util.List;
 
 @Controller
 public class PageController {
+
+    @Value( "${calendar.token}" )
+    private String token;
 
     @Autowired
     private EmailService emailService;
@@ -61,6 +65,14 @@ public class PageController {
 
     @GetMapping("/info")
     public String infotPage(Model model) {
+        return "info";
+    }
+
+    @GetMapping("/kalender")
+    public String kalenderPage(@RequestParam(name = "token") String token) {
+        if (this.token.equals(token)) {
+            return "kalender";
+        }
         return "info";
     }
 
