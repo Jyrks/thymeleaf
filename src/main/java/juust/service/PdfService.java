@@ -70,15 +70,17 @@ public class PdfService {
 
         createOrders(emailInfo.getPlatterOrders(), table);
 
+        drawLine(36, 559, 530, emailInfo.getPlatterOrders().size(), writer);
+
         addEmptyCells(3, table);
         addEmptyCells(3, table);
 
         addEmptyCells(1, table);
         table.addCell(createCell("Käibemaks:"));
-        table.addCell(createCell("0"));
+        table.addCell(createCell("-"));
         addEmptyCells(1, table);
         table.addCell(createBoldCell("KOKKU (EUR):"));
-        table.addCell(createBoldCell("" + String.format("%1$,.0f", emailInfo.getPrice()) + " €"));
+        table.addCell(createBoldCell("" + String.format("%1$,.2f", emailInfo.getPrice()) + " €"));
         document.add(table);
         document.add(createEmptyRows(25 -  emailInfo.getPlatterOrders().size()));
 
@@ -107,7 +109,7 @@ public class PdfService {
         for (PlatterOrder po : platterOrders) {
             table.addCell(createCell(po.getName()));
             table.addCell(createCell("     " + po.getNumber()));
-            table.addCell(createCell("" + String.format("%1$,.0f", po.getPrice())));
+            table.addCell(createCell("" + String.format("%1$,.2f", po.getPrice())));
         }
     }
 
@@ -131,6 +133,14 @@ public class PdfService {
         PdfContentByte canvas = writer.getDirectContent();
         canvas.moveTo(leftX, heightY);
         canvas.lineTo(rightX, heightY);
+        canvas.closePathStroke();
+    }
+
+    private void drawLine(int leftX, int rightX, int heightY, int platters, PdfWriter writer) {
+        int columnHeight = 17;
+        PdfContentByte canvas = writer.getDirectContent();
+        canvas.moveTo(leftX, heightY - platters * columnHeight);
+        canvas.lineTo(rightX, heightY - platters * columnHeight);
         canvas.closePathStroke();
     }
 
