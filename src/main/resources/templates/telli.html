@@ -10,6 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
@@ -52,14 +53,14 @@
                 <div class="row">
                     <p>Lisa kandikutüüp ja kogus</p>
                 </div>
-                <div style="color: red; display:none" id="lisaKandikText">Lisa kandik</div>
+                <p style="color: red; display:none" id="lisaKandikText">Lisa kandik</p>
             </div>
         </div>
         <div id="väikeDiv" style="display:none" class="container mb-5">
             <div class="col-12">
                 <div class="row">
                     <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/väike.jpg" alt="">
-                    <div class="ml-3 mt-3" id="väikeNr"></div>
+                    <p class="ml-3 mt-3" id="väikeNr"></p>
                 </div>
             </div>
         </div>
@@ -68,7 +69,7 @@
             <div class="col-12">
                 <div class="row">
                     <img style="width: calc(100%  /3); height: calc(100%  /3)" src="img/bg-img/suur.jpg" alt="">
-                    <div class="ml-3 mt-3" id="suurNr"></div>
+                    <p class="ml-3 mt-3" id="suurNr"></p>
                 </div>
             </div>
         </div>
@@ -78,7 +79,7 @@
                 <div class="col-12 col-lg-3 mt-2">
                     <select name="select1" id="selectVaagen" class="custom-select">
                         <tr th:each ="platter : ${availablePlatters}">
-                            <option th:value="${platter.name}" th:utext="${platter.name}">...</option>
+                            <option class="normal-text" th:value="${platter.name}" th:utext="${platter.name}">...</option>
                             <td th:utext="${platter.name}">...</td>
                         </tr>
                     </select>
@@ -135,7 +136,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4">
-                    <div>Nimi</div>
+                    <p>Nimi</p>
                     <div class='input-group date'>
                         <input type='text' class="form-control" id="nameInput"/>
                     </div>
@@ -146,7 +147,7 @@
         <div class="container mt-3">
             <div class="row">
                 <div class="col-12 col-lg-4">
-                    <div>Telefon</div>
+                    <p>Telefon</p>
                     <div class='input-group date'>
                         <input type='text' class="form-control" id="phoneNumberInput"/>
                     </div>
@@ -157,7 +158,7 @@
         <div class="container mt-3">
             <div class="row">
                 <div class="col-12 col-lg-4">
-                    <div>Email</div>
+                    <p>Email</p>
                     <div class='input-group date'>
                         <input type='text' class="form-control" id="emailInput"/>
                     </div>
