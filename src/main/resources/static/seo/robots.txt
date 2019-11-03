@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /kalender
+Sitemap:https://www.juustuunelm.ee/sitemap.xml
