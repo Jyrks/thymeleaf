@@ -16,12 +16,12 @@
     <priority>1</priority>
     <lastmod>2019-11-03T17:18:18Z</lastmod>
   </url>
-  <url>
-    <loc>https://www.juustuunelm.ee/telli.html</loc>
-    <changefreq>Monthly</changefreq>
-    <priority>1</priority>
-    <lastmod>2019-11-03T17:18:18Z</lastmod>
-  </url>
+<!--  <url>-->
+<!--    <loc>https://www.juustuunelm.ee/telli.html</loc>-->
+<!--    <changefreq>Monthly</changefreq>-->
+<!--    <priority>1</priority>-->
+<!--    <lastmod>2019-11-03T17:18:18Z</lastmod>-->
+<!--  </url>-->
   <url>
     <loc>https://www.juustuunelm.ee/kontakt.html</loc>
     <changefreq>Monthly</changefreq>
