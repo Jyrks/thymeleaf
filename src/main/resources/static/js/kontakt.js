@@ -31,6 +31,7 @@ $('#sendEmail').on('click', function() {
         body: JSON.stringify({
             emailAddress: $('#emailInput').val(),
             email: $('#emailContent').val(),
+            phoneNr: $('#phoneNrInput').val(),
             name: $('#nameInput').val()
         })
     });

@@ -144,7 +144,7 @@ public class EmailService {
                 });
 
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.setContent(request.getEmail(), "text/html");
+            mimeBodyPart.setContent(request.getEmail() + " Tel nr: " + request.getPhoneNr(), "text/html");
 
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(mimeBodyPart);
